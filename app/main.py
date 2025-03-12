@@ -2,8 +2,8 @@ from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.database import SessionLocal, engine
 from app.models import User
-from app.schemas import UserCreate, UserResponse
-from app.utils import hash_password
+from app.schemas import UserLogin, UserCreate, UserResponse, TokenResponse
+from app.utils import verify_password, create_access_token, ACCESS_TOKEN_EXPIRE_MINUTES
 
 app = FastAPI()
 
@@ -42,3 +42,20 @@ def register_user(user: UserCreate, db: Session = Depends(get_db)):
     db.refresh(new_user)
 
     return new_user  # Return user information (without password)
+
+# User Login API
+@app.post("/login", response_model=TokenResponse)
+def login(user_login: UserLogin, db: Session = Depends(get_db)):
+    # Check if the user exists
+    user = db.query(User).filter(User.email == user_login.email).first()
+    if not user:
+        raise HTTPException(status_code=400, detail="Invalid email or password")
+
+    # Verify password
+    if not verify_password(user_login.password, user.hashed_password):
+        raise HTTPException(status_code=400, detail="Invalid email or password")
+
+    # Generate JWT tokens
+    access_token = create_access_token(data={"sub": user.email})
+
+    return {"access_token": access_token, "token_type": "bearer"}

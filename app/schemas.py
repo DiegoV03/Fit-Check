@@ -15,3 +15,13 @@ class UserResponse(BaseModel):
 
     class Config:
         orm_mode = True
+
+# User login request format
+class UserLogin(BaseModel):
+    email: str
+    password: str
+
+# Token response format
+class TokenResponse(BaseModel):
+    access_token: str
+    token_type: str
