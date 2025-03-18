@@ -1,0 +1,28 @@
+.email-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #92bf3f;
+  text-align: center;
+}
+
+.email-title {
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.email-input {
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.email-submit-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}

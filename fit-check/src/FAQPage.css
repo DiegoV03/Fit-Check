@@ -1,0 +1,36 @@
+.faq-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #92bf3f;
+  text-align: center;
+}
+
+.faq-title {
+  font-size: 48px;
+  font-weight: bold;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.faq-content {
+  text-align: left;
+  color: white;
+  margin-bottom: 20px;
+}
+
+.faq-item {
+  margin-bottom: 10px;
+}
+
+.faq-item h2 {
+  cursor: pointer;
+}
+
+.faq-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
