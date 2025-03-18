@@ -1,4 +1,4 @@
-
+from typing import Optional
 from pydantic import BaseModel, EmailStr
 
 # User registration request model
@@ -25,3 +25,18 @@ class UserLogin(BaseModel):
 class TokenResponse(BaseModel):
     access_token: str
     token_type: str
+
+class ClothingItemBase(BaseModel):
+    name: str
+    color: str
+    category: str
+
+class ClothingItemCreate(ClothingItemBase):
+    pass
+
+class ClothingItemResponse(ClothingItemBase):
+    id: int
+    owner_id: int
+
+    class Config:
+        from_attributes = True
