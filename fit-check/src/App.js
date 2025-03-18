@@ -8,6 +8,7 @@ import NewUserScreen from './NewUserScreen';
 import LandingPage from './LandingPage';
 import WelcomeBackScreen from './WelcomeBackScreen';
 import FAQPage from './FAQPage';
+import AccountPage from './AccountPage';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('welcome');
@@ -29,9 +30,14 @@ function App() {
       case 'welcomeBack':
         return <WelcomeBackScreen onGoHome={() => setCurrentPage('landing')} />;
       case 'landing':
-        return <LandingPage onFAQ={() => setCurrentPage('faq')} />;
+        return <LandingPage 
+                  onFAQ={() => setCurrentPage('faq')} 
+                  onAccount={() => setCurrentPage('account')} 
+               />;
       case 'faq':
         return <FAQPage onGoHome={() => setCurrentPage('landing')} />;
+      case 'account':
+        return <AccountPage onGoHome={() => setCurrentPage('landing')} />;
       default:
         return <WelcomeScreen onGetStarted={() => setCurrentPage('signin')} />;
     }
