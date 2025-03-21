@@ -1,3 +1,9 @@
+Dependencies Install
+1. Run npm install --legacy-peer-deps
+2. Run npm install
+3. npm start
+
+
 Completed Features
 1. Database
 Install and configure PostgreSQL
