@@ -1,0 +1,69 @@
+
+.access-curr-wardrobe {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #92bf3f !important;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.back-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.back-button:hover {
+  background-color: #0056b3;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.wardrobe-sections {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  gap: 20px;
+}
+
+.wardrobe-section {
+  flex: 1;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.wardrobe-section h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.scrollable {
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 5px;
+}
+
+.scrollable p {
+  margin: 5px 0;
+  padding: 5px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
