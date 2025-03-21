@@ -13,11 +13,29 @@ const SignUpPage = ({ onSignIn }) => {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       console.log("User created:", userCredential.user);
       alert("Account created successfully! Please sign in.");
-      onSignIn(); // Redirect to SignInPage after signup
+      onSignIn(true);
     } catch (error) {
-      setError("Sign Up Failed: " + error.message);
+        let customMessage = "";
+
+        if (error.code === "auth/weak-password") {
+            customMessage += "Password must be at least 6 characters.";
+        }
+        else if (error.code === "auth/email-already-in-use") {
+            customMessage += "This email is already registered. Please use a different email or sign in.";
+        }
+        else if (error.code === "auth/invalid-email") {
+            customMessage += "Please enter a valid email address.";
+        }
+        else if (error.code === "auth/network-request-failed") {
+            customMessage += "Network error. Please check your internet connection.";
+        }
+        else {
+             setError("Sign Up Failed: " + error.message);
+        }
+
+        setError(customMessage);
     }
-  };
+};
 
   return (
     <div className="sign-in-page">

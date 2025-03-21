@@ -14,7 +14,23 @@ const SignInPage = ({ onNewUser, onReturningUser }) => {
             alert("Login Successful!");
             onReturningUser();  // Navigate to the next step
         } catch (error) {
-            setError("Login Failed: " + error.message);
+            let customMessage = "Login Failed: wrong password";  
+    
+            if (error.code === "auth/wrong-password") {
+                customMessage += "Incorrect password. Please try again.";
+            } else if (error.code === "auth/user-not-found") {
+                customMessage += "No account found with this email. Please check your email or sign up.";
+            } else if (error.code === "auth/invalid-email") {
+                customMessage += "Please enter a valid email address.";
+            } else if (error.code === "auth/too-many-requests") {
+                customMessage += "Too many failed login attempts. Please try again later or reset your password.";
+            } else if (error.code === "auth/network-request-failed") {
+                customMessage += "Network error. Please check your internet connection.";
+            } else {
+                setError("Login Failed: " + "Incorrect password. Please try again.");;
+            }
+    
+            setError(customMessage);
         }
     };
 
