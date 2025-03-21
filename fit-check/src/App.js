@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import WelcomeScreen from './WelcomeScreen';
 import SignInPage from './SignInPage';
+import SignUpPage from './SignUpPage'; // ✅ Import SignUpPage
 import EmailPage from './EmailPage';
 import NewUserPasswordPage from './NewUserPasswordPage';
 import NewUserScreen from './NewUserScreen';
@@ -18,7 +19,9 @@ function App() {
       case 'welcome':
         return <WelcomeScreen onGetStarted={() => setCurrentPage('signin')} />;
       case 'signin':
-        return <SignInPage onNewUser={() => setCurrentPage('email')} onReturningUser={() => setCurrentPage('welcomeBack')} />;
+        return <SignInPage onNewUser={() => setCurrentPage('signup')} onReturningUser={() => setCurrentPage('welcomeBack')} />;
+      case 'signup':
+        return <SignUpPage onSignIn={() => setCurrentPage('signin')} />;
       case 'email':
         return <EmailPage onEmailSubmit={() => setCurrentPage('newUserPassword')} />;
       case 'newUserPassword':
@@ -32,8 +35,7 @@ function App() {
       case 'landing':
         return <LandingPage 
                   onFAQ={() => setCurrentPage('faq')} 
-                  onAccount={() => setCurrentPage('account')} 
-               />;
+                  onAccount={() => setCurrentPage('account')} />;
       case 'faq':
         return <FAQPage onGoHome={() => setCurrentPage('landing')} />;
       case 'account':

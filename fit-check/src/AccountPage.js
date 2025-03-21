@@ -1,4 +1,6 @@
 import React from 'react';
+import { signOut } from "firebase/auth";
+import { auth } from "./firebaseConfig"; // Import Firebase authentication
 import './AccountPage.css';
 
 const AccountPage = ({ onGoHome }) => {
@@ -7,6 +9,17 @@ const AccountPage = ({ onGoHome }) => {
         username: 'JohnDoe',
         birthday: '1990-01-01',
         profileImage: 'https://via.placeholder.com/150', // Replace with actual image URL
+    };
+
+    // ✅ Logout Function
+    const handleLogout = async () => {
+        try {
+            await signOut(auth);
+            alert("You have been logged out!");
+            window.location.reload(); // Reload the page to reset authentication state
+        } catch (error) {
+            alert("Logout Failed: " + error.message);
+        }
     };
 
     return (
@@ -32,6 +45,9 @@ const AccountPage = ({ onGoHome }) => {
             </div>
             <button className="account-button" onClick={onGoHome}>
                 Go to Home Screen
+            </button>
+            <button className="account-button logout-button" onClick={handleLogout}>
+                Log Out
             </button>
         </div>
     );
