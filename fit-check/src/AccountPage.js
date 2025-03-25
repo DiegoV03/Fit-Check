@@ -8,7 +8,7 @@ const AccountPage = ({ onGoHome }) => {
     const userData = {
         username: 'JohnDoe',
         birthday: '1990-01-01',
-        profileImage: 'https://via.placeholder.com/150', // Replace with actual image URL
+        profileImage: 'https://via.placeholder.com/150', // Replace with actual image URL.
     };
 
     // ✅ Logout Function

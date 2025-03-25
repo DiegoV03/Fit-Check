@@ -10,6 +10,10 @@ import LandingPage from './LandingPage';
 import WelcomeBackScreen from './WelcomeBackScreen';
 import FAQPage from './FAQPage';
 import AccountPage from './AccountPage';
+import LinkClothingAdder from './LinkClothingAdder';
+import ManualClothingAdder from './ManualClothingAdder';
+import AccessCurrWardrobe from './AccessCurrWardrobe';
+import OutfitSelector from './OutfitSelector';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('welcome');
@@ -35,11 +39,30 @@ function App() {
       case 'landing':
         return <LandingPage 
                   onFAQ={() => setCurrentPage('faq')} 
-                  onAccount={() => setCurrentPage('account')} />;
+                  onAccount={() => setCurrentPage('account')} 
+                  onAddClothing={() => setCurrentPage('linkClothingAdder')} 
+                  onAccessWardrobe={() => setCurrentPage('accessCurrWardrobe')} 
+                  onChooseOutfit={() => setCurrentPage('outfitSelector')} 
+                  onBackToMenu={() => setCurrentPage('welcome')} 
+               />;
       case 'faq':
         return <FAQPage onGoHome={() => setCurrentPage('landing')} />;
       case 'account':
         return <AccountPage onGoHome={() => setCurrentPage('landing')} />;
+      case 'linkClothingAdder':
+        return <LinkClothingAdder 
+                  onEnterManually={() => setCurrentPage('manualClothingAdder')} 
+                  onGoBack={() => setCurrentPage('landing')} 
+               />;
+      case 'manualClothingAdder':
+        return <ManualClothingAdder onGoBack={() => setCurrentPage('linkClothingAdder')} />;
+      case 'accessCurrWardrobe':
+        return <AccessCurrWardrobe onGoBack={() => setCurrentPage('landing')} />;
+      case 'outfitSelector':
+        return <OutfitSelector 
+                  onRemakeFit={() => setCurrentPage('outfitSelector')} 
+                  onGoBack={() => setCurrentPage('landing')} 
+               />;
       default:
         return <WelcomeScreen onGetStarted={() => setCurrentPage('signin')} />;
     }
