@@ -30,6 +30,9 @@ class ClothingItemBase(BaseModel):
     name: str
     color: str
     category: str
+    fabric: str
+    size: str
+    length: str
 
 class ClothingItemCreate(ClothingItemBase):
     pass

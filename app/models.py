@@ -20,6 +20,9 @@ class ClothingItem(Base):
     name = Column(String, index=True)
     color = Column(String)
     category = Column(String)
+    fabric = Column(String)
+    size = Column(String)
+    length = Column(String)
     owner_id = Column(Integer, ForeignKey("users.id"))
 
     owner = relationship("User", back_populates="clothes")

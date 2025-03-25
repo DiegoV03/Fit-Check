@@ -3,11 +3,18 @@ from sqlalchemy.orm import Session
 from app.database import SessionLocal, engine
 from app.models import User, ClothingItem
 from app.schemas import UserLogin, UserCreate, UserResponse, TokenResponse, ClothingItemCreate, ClothingItemResponse
-from app.utils import verify_password, create_access_token, ACCESS_TOKEN_EXPIRE_MINUTES, get_current_user
+from app.utils import verify_password, create_access_token, ACCESS_TOKEN_EXPIRE_MINUTES, get_current_user, hash_password
 from app.crud import create_clothing_item, get_clothing_items, get_clothing_item, update_clothing_item, delete_clothing_item
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:3000"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 # Dependencies: Getting a database connection
 def get_db():
     db = SessionLocal()

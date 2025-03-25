@@ -5,53 +5,73 @@ Dependencies Install
 
 
 Completed Features
-1. Database
-Install and configure PostgreSQL
-Create database and users
+1.  PostgreSQL Database
+PostgreSQL installation and setup
 
-fitcheck Database
-fitcheck_user Database User
-Database Administration
+fitcheck database
 
-Configuring SQLAlchemy for Database Connectivity
-Database Migration with Alembic
-Create users table
+fitcheck_user database user
 
-Store user information (username, email, password)
+Integrated with SQLAlchemy ORM
+
+Alembic database migration system
+
+Tables:
+
+users (username, email, hashed password)
+
+clothes (name, color, category, fabric, size, length, owner_id)
 
 2. FastAPI Backend
-FastAPI Server Setup
-User related API
+FastAPI server setup with modular structure
 
-POST /users/ - Register users
-GET /users/ - get all users
-POST /login - user login, return JWT token
+User-related APIs:
+
+POST /users/ – Register new user
+
+GET /users/ – Get all users
+
+POST /token – Login and return JWT token
+
+Clothing-related APIs (authentication required):
+
+GET /clothes/ – List current user's clothes
+
+GET /clothes/{item_id} – View clothing item detail
+
+POST /clothes/ – Add new clothing item
+
 Security
+Passwords hashed using bcrypt
 
-bcrypt for password hash storage
-JWT generates access_token for authentication
+JWT token-based authentication with OAuth2
+
+Auth-protected endpoints with Depends(get_current_user)
+
 API Testing
+Swagger UI: http://127.0.0.1:8000/docs
 
-API debugging via curl
-Access to Swagger UI testing interface (http://127.0.0.1:8000/docs)
+curl/Postman testing supported
 
-Installation and operation
+Setup Guide
+1. Clone Repository
 
-1. clone warehouse
-
-git clone https://github.com/your-repo/FitCheck.git
+git clone https://github.com/DiegoV03/Fit-Check.git
 cd FitCheck
 
-2. Creating a Python Virtual Environment and Installing Dependencies
+2. Python Virtual Environment & Dependencies
 
 python -m venv venv
-source venv/bin/activate  # MacOS/Linux
-venv\Scripts\activate    # Windows
+# For macOS/Linux:
+source venv/bin/activate
+# For Windows:
+venv\Scripts\activate
+
 pip install -r requirements.txt
 
-3. Configuring the PostgreSQL Database
+3. Configure PostgreSQL Database
+Make sure PostgreSQL is installed. Then:
 
-Ensure that PostgreSQL is installed and execute the following commands to create the database and users:
 CREATE DATABASE fitcheck;
 CREATE USER fitcheck_user WITH PASSWORD 'fitcheck_password';
 ALTER ROLE fitcheck_user SET client_encoding TO 'utf8';
@@ -59,17 +79,17 @@ ALTER ROLE fitcheck_user SET default_transaction_isolation TO 'read committed';
 ALTER ROLE fitcheck_user SET timezone TO 'UTC';
 GRANT ALL PRIVILEGES ON DATABASE fitcheck TO fitcheck_user;
 
-4. Configuring Database Connections
+4. Set Database URL (in .env or config)
 
 DATABASE_URL = "postgresql://fitcheck_user:fitcheck_password@localhost/fitcheck"
 
-5. Running a database migration
+5. Run Database Migrations with Alembic
 
-alembic init migrations
 alembic revision --autogenerate -m "Initial migration"
 alembic upgrade head
 
-6. Running the FastAPI Server
+6. Launch FastAPI Backend
 
 uvicorn app.main:app --reload
-The server will run on http://127.0.0.1:8000
+Server will run on: http://127.0.0.1:8000
+

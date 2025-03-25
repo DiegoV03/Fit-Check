@@ -10,12 +10,35 @@ const SignInPage = ({ onNewUser, onReturningUser }) => {
 
     const handleLogin = async () => {
         try {
+            // Step 1: Firebase authentication
             await signInWithEmailAndPassword(auth, email, password);
+            console.log("Firebase login success");
+
+            // Step 2: FastAPI backend login to get JWT token
+            const response = await fetch("http://127.0.0.1:8000/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ email, password })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                throw new Error(data.detail || "Backend login failed");
+            }
+
+            // Step 3: Save JWT token to localStorage
+            localStorage.setItem("access_token", data.access_token);
+            console.log("JWT token saved:", data.access_token);
+
             alert("Login Successful!");
-            onReturningUser();  // Navigate to the next step
+            onReturningUser();  // Navigate to next step
+
         } catch (error) {
-            let customMessage = "Login Failed: wrong password";  
-    
+            let customMessage = "Login Failed: ";
+
             if (error.code === "auth/wrong-password") {
                 customMessage += "Incorrect password. Please try again.";
             } else if (error.code === "auth/user-not-found") {
@@ -27,9 +50,10 @@ const SignInPage = ({ onNewUser, onReturningUser }) => {
             } else if (error.code === "auth/network-request-failed") {
                 customMessage += "Network error. Please check your internet connection.";
             } else {
-                setError("Login Failed: " + "Incorrect password. Please try again.");;
+                customMessage += error.message;
             }
-    
+
+            console.error("Login error:", error);
             setError(customMessage);
         }
     };

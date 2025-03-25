@@ -10,32 +10,56 @@ const SignUpPage = ({ onSignIn }) => {
 
   const handleSignUp = async () => {
     try {
+      //  Step 1: Register with Firebase
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      console.log("User created:", userCredential.user);
-      alert("Account created successfully! Please sign in.");
+      console.log("Firebase user created:", userCredential.user);
+
+      //  Step 2: Send user data to FastAPI backend
+      const body = {
+        username: email.split("@")[0],
+        email: email,
+        password: password
+      };
+      console.log("Sending data to FastAPI:", body);
+
+      const response = await fetch("http://127.0.0.1:8000/users/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error("Backend registration failed:", errorData);
+        alert("Backend registration failed: " + (errorData.detail || JSON.stringify(errorData)));
+        return;
+      }
+
+      alert(" Account created successfully! Please sign in.");
       onSignIn(true);
+
     } catch (error) {
-        let customMessage = "";
+      console.error("Registration error:", error);
 
-        if (error.code === "auth/weak-password") {
-            customMessage += "Password must be at least 6 characters.";
-        }
-        else if (error.code === "auth/email-already-in-use") {
-            customMessage += "This email is already registered. Please use a different email or sign in.";
-        }
-        else if (error.code === "auth/invalid-email") {
-            customMessage += "Please enter a valid email address.";
-        }
-        else if (error.code === "auth/network-request-failed") {
-            customMessage += "Network error. Please check your internet connection.";
-        }
-        else {
-             setError("Sign Up Failed: " + error.message);
-        }
+      let customMessage = "";
 
-        setError(customMessage);
+      if (error.code === "auth/weak-password") {
+        customMessage = "Password must be at least 6 characters.";
+      } else if (error.code === "auth/email-already-in-use") {
+        customMessage = "This email is already registered. Please use a different email or sign in.";
+      } else if (error.code === "auth/invalid-email") {
+        customMessage = "Please enter a valid email address.";
+      } else if (error.code === "auth/network-request-failed") {
+        customMessage = "Network error. Please check your internet connection.";
+      } else {
+        customMessage = "Sign Up Failed: " + error.message;
+      }
+
+      setError(customMessage);
     }
-};
+  };
 
   return (
     <div className="sign-in-page">
