@@ -1,95 +1,127 @@
-Dependencies Install
-1. Run npm install --legacy-peer-deps
-2. Run npm install
-3. npm start
+#  FitCheck: Smart Wardrobe Management App
 
+##  Completed Features
 
-Completed Features
-1.  PostgreSQL Database
-PostgreSQL installation and setup
+###  Database Setup
+- PostgreSQL database: `fitcheck`
+- Database user: `fitcheck_user`
+- Integrated with SQLAlchemy ORM
+- Alembic for database migrations
 
-fitcheck database
+###  Tables
+- `users`: `username`, `email`, `hashed_password`
+- `clothes`: `name`, `color`, `category`, `fabric`, `size`, `length`, `owner_id`
 
-fitcheck_user database user
+###  Backend (FastAPI)
+- Modular FastAPI server setup
+- Passwords securely hashed using `bcrypt`
+- JWT authentication using OAuth2
+- Swagger API docs: [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs)
+- `Depends(get_current_user)` for route protection
 
-Integrated with SQLAlchemy ORM
+###  User APIs
+| Endpoint         | Method | Description                  |
+|------------------|--------|------------------------------|
+| `/users/`        | POST   | Register new user            |
+| `/users/`        | GET    | Get all users                |
+| `/login`         | POST   | Login and return JWT token   |
 
-Alembic database migration system
+###  Clothing APIs (requires authentication)
+| Endpoint                  | Method | Description                     |
+|---------------------------|--------|---------------------------------|
+| `/clothes/`               | GET    | List current user's clothes     |
+| `/clothes/{item_id}`      | GET    | View clothing item details      |
+| `/clothes/`               | POST   | Add new clothing item           |
+| `/clothes/{item_id}`      | PUT    | Update clothing item            |
+| `/clothes/{item_id}`      | DELETE | Delete clothing item            |
 
-Tables:
+---
 
-users (username, email, hashed password)
+##  Setup Guide
 
-clothes (name, color, category, fabric, size, length, owner_id)
+### 1. Clone Repository
 
-2. FastAPI Backend
-FastAPI server setup with modular structure
-
-User-related APIs:
-
-POST /users/ – Register new user
-
-GET /users/ – Get all users
-
-POST /token – Login and return JWT token
-
-Clothing-related APIs (authentication required):
-
-GET /clothes/ – List current user's clothes
-
-GET /clothes/{item_id} – View clothing item detail
-
-POST /clothes/ – Add new clothing item
-
-Security
-Passwords hashed using bcrypt
-
-JWT token-based authentication with OAuth2
-
-Auth-protected endpoints with Depends(get_current_user)
-
-API Testing
-Swagger UI: http://127.0.0.1:8000/docs
-
-curl/Postman testing supported
-
-Setup Guide
-1. Clone Repository
-
+```bash
 git clone https://github.com/DiegoV03/Fit-Check.git
 cd FitCheck
+```
 
-2. Python Virtual Environment & Dependencies
+### 2. Install Dependencies
 
+#### Frontend
+```bash
+npm install --legacy-peer-deps
+npm install
+npm start
+```
+
+#### Backend (Python)
+```bash
 python -m venv venv
-# For macOS/Linux:
+```
+
+##### For macOS/Linux:
+```bash
 source venv/bin/activate
-# For Windows:
+```
+
+##### For Windows:
+```bash
 venv\Scripts\activate
+```
 
+```bash
 pip install -r requirements.txt
+```
 
-3. Configure PostgreSQL Database
-Make sure PostgreSQL is installed. Then:
+---
 
+##  PostgreSQL Configuration
+
+Make sure PostgreSQL is installed, then run:
+
+```sql
 CREATE DATABASE fitcheck;
 CREATE USER fitcheck_user WITH PASSWORD 'fitcheck_password';
+
 ALTER ROLE fitcheck_user SET client_encoding TO 'utf8';
 ALTER ROLE fitcheck_user SET default_transaction_isolation TO 'read committed';
 ALTER ROLE fitcheck_user SET timezone TO 'UTC';
+
 GRANT ALL PRIVILEGES ON DATABASE fitcheck TO fitcheck_user;
+```
 
-4. Set Database URL (in .env or config)
+---
 
-DATABASE_URL = "postgresql://fitcheck_user:fitcheck_password@localhost/fitcheck"
+##  Environment Config
 
-5. Run Database Migrations with Alembic
+In your `.env` or settings file:
 
+```env
+DATABASE_URL="postgresql://fitcheck_user:fitcheck_password@localhost/fitcheck"
+```
+
+---
+
+##  Alembic Migrations
+
+```bash
 alembic revision --autogenerate -m "Initial migration"
 alembic upgrade head
+```
 
-6. Launch FastAPI Backend
+---
 
+##  Launch Backend
+
+```bash
 uvicorn app.main:app --reload
-Server will run on: http://127.0.0.1:8000
+```
 
+Server will run at: [http://127.0.0.1:8000](http://127.0.0.1:8000)
+
+---
+
+##  API Testing
+- Swagger UI: `/docs`
+- curl/Postman supported
