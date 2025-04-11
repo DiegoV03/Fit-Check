@@ -37,10 +37,37 @@ const LinkClothingAdder = ({ onEnterManually, onGoBack }) => {
         }
     };
 
-    const handleAddToWardrobe = () => {
-        console.log('Send to wardrobe backend:', scrapedItem);
-        // 可选：发送 POST 请求保存到数据库
+    const handleAddToWardrobe = async () => {
+        try {
+            const response = await fetch('http://localhost:8000/clothes/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${localStorage.getItem('access_token')}`,
+                },
+                body: JSON.stringify({
+                    name: scrapedItem.name || "",
+                    color: scrapedItem.color || "",
+                    category: "Outerwear",
+                    fabric: "unknown",
+                    size: "M",
+                    length: "standard",
+                    description: scrapedItem.description || "",
+                    image_url: scrapedItem.image_url || "",
+                }),
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to add clothing item');
+            }
+    
+            alert("Item added to wardrobe!");
+        } catch (err) {
+            console.error("Error sending to wardrobe:", err);
+            alert("Failed to add item.");
+        }
     };
+    
 
     return (
         <div className="link-clothing-adder">

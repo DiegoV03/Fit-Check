@@ -17,9 +17,13 @@ class ClothingItem(Base):
     __tablename__ = "clothes"
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, index=True)
-    color = Column(String)
-    category = Column(String)
-    owner_id = Column(Integer, ForeignKey("users.id"))
-
+    name = Column(String, nullable=False)
+    color = Column(String, nullable=False)
+    category = Column(String, default="", nullable=False)
+    fabric = Column(String, default="", nullable=False)
+    size = Column(String, default="", nullable=False)
+    length = Column(String, default="", nullable=False)
+    image_url = Column(String, default="")
+    description = Column(String, default="")
+    owner_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     owner = relationship("User", back_populates="clothes")

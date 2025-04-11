@@ -3,11 +3,18 @@ from app.models import ClothingItem
 from app.schemas import ClothingItemCreate
 
 def create_clothing_item(db: Session, item: ClothingItemCreate, owner_id: int):
-    db_item = ClothingItem(**item.dict(), owner_id=owner_id)
+    item_dict = item.dict()
+
+    for field in ['category', 'fabric', 'size', 'length']:
+        if item_dict[field] is None:
+            item_dict[field] = ""
+
+    db_item = ClothingItem(**item_dict, owner_id=owner_id)
     db.add(db_item)
     db.commit()
     db.refresh(db_item)
     return db_item
+
 
 def get_clothing_items(db: Session, owner_id: int):
     return db.query(ClothingItem).filter(ClothingItem.owner_id == owner_id).all()

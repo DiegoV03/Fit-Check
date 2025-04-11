@@ -31,12 +31,30 @@ class ClothingItemBase(BaseModel):
     name: str
     color: str
     category: str
+    fabric: str
+    size: str
+    length: str
 
-class ClothingItemCreate(ClothingItemBase):
-    pass
+class ClothingItemCreate(BaseModel):
+    name: str
+    color: str
+    description: str = ""
+    image_url: str = ""
+    category: str = ""
+    fabric: str = ""
+    size: str = ""
+    length: str = ""
 
-class ClothingItemResponse(ClothingItemBase):
+class ClothingItemResponse(BaseModel):
     id: int
+    name: str
+    color: str
+    category: str
+    fabric: Optional[str] = None
+    size: Optional[str] = None
+    length: Optional[str] = None
+    image_url: Optional[str] = None
+    description: Optional[str] = None
     owner_id: int
 
     class Config:
