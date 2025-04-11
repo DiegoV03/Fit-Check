@@ -5,8 +5,23 @@ from app.models import User, ClothingItem
 from app.schemas import UserLogin, UserCreate, UserResponse, TokenResponse, ClothingItemCreate, ClothingItemResponse
 from app.utils import verify_password, create_access_token, ACCESS_TOKEN_EXPIRE_MINUTES, get_current_user
 from app.crud import create_clothing_item, get_clothing_items, get_clothing_item, update_clothing_item, delete_clothing_item
+from fastapi import FastAPI, Request
+from app.scraper import scrape_ssense_product
+from pydantic import BaseModel
+from app.scraper_selenium import scrape_ssense_selenium
+from app.schemas import ScrapeRequest
+from app.scraper_selenium import scrape_zara_selenium
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # 或改成 ["http://localhost:3000"]
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # Dependencies: Getting a database connection
 def get_db():
@@ -102,3 +117,38 @@ def delete_item(item_id: int, db: Session = Depends(get_db), current_user=Depend
     if not item:
         raise HTTPException(status_code=404, detail="Item not found")
     return {"message": "Item deleted"}
+
+# Define input url
+class ScrapeRequest(BaseModel):
+    url: str
+
+@app.post("/scrape/")
+async def scrape_link(payload: ScrapeRequest):
+    url = payload.url
+
+    if not url:
+        return {"error": "Missing link"}
+
+    if "ssense.com" in url:
+        result = scrape_ssense_product(url)
+        return result
+    else:
+        return {"error": "Currently don't support this website!"}
+
+@app.post("/scrape_selenium/")
+async def scrape_with_selenium(request: ScrapeRequest):
+    url = request.url
+
+    if not url:
+        return {"error": "Missing URL"}
+
+    if "ssense.com" in url:
+        result = scrape_ssense_selenium(url)
+        return result
+    else:
+        return {"error": "Only ssense.com is supported in this demo"}
+
+@app.post("/scrape_zara/")
+def scrape_zara(req: ScrapeRequest):
+    result = scrape_zara_selenium(req.url)
+    return result

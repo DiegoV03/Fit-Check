@@ -1,5 +1,6 @@
 from typing import Optional
 from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel
 
 # User registration request model
 class UserCreate(BaseModel):
@@ -40,3 +41,7 @@ class ClothingItemResponse(ClothingItemBase):
 
     class Config:
         from_attributes = True
+
+# For scraper
+class ScrapeRequest(BaseModel):
+    url: str
