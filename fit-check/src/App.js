@@ -14,6 +14,7 @@ import LinkClothingAdder from './LinkClothingAdder';
 import ManualClothingAdder from './ManualClothingAdder';
 import AccessCurrWardrobe from './AccessCurrWardrobe';
 import OutfitSelector from './OutfitSelector';
+import StyleSearch from './StyleSearch'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('welcome');
@@ -42,7 +43,11 @@ function App() {
                   onAccount={() => setCurrentPage('account')} 
                   onAddClothing={() => setCurrentPage('linkClothingAdder')} 
                   onAccessWardrobe={() => setCurrentPage('accessCurrWardrobe')} 
-                  onChooseOutfit={() => setCurrentPage('outfitSelector')} 
+                  onChooseOutfit={() => setCurrentPage('outfitSelector')}
+                  onSearchStyles={() => {
+                    console.log('Attempting to go to styleSearch');
+                    setCurrentPage('styleSearch');
+                  }}
                   onBackToMenu={() => setCurrentPage('welcome')} 
                />;
       case 'faq':
@@ -63,6 +68,8 @@ function App() {
                   onRemakeFit={() => setCurrentPage('outfitSelector')} 
                   onGoBack={() => setCurrentPage('landing')} 
                />;
+      case 'styleSearch':
+        return <StyleSearch onGoBack={() => setCurrentPage('landing')} />;
       default:
         return <WelcomeScreen onGetStarted={() => setCurrentPage('signin')} />;
     }

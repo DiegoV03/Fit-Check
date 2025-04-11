@@ -1,0 +1,28 @@
+.style-search-page {
+    padding: 2rem;
+    text-align: center;
+  }
+  
+  .outfits-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+  
+  .outfit-card {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 1rem;
+  }
+
+  .error {
+    color: #ff3333;
+    margin: 1rem 0;
+  }
+  
+  .generate-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+  }

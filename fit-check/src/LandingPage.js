@@ -1,7 +1,7 @@
 import React from 'react';
 import './LandingPage.css';
 
-const LandingPage = ({ onFAQ, onAccount, onAddClothing, onAccessWardrobe, onChooseOutfit }) => {
+const LandingPage = ({ onFAQ, onAccount, onAddClothing, onAccessWardrobe, onChooseOutfit, onSearchStyles }) => {
     return (
         <div className="landing-page">
             <header className="landing-page-header">
@@ -16,7 +16,7 @@ const LandingPage = ({ onFAQ, onAccount, onAddClothing, onAccessWardrobe, onChoo
                     <button onClick={onAccessWardrobe}>Access Current Wardrobe</button>
                     <button onClick={onChooseOutfit}>Choose an Outfit</button>
                     <button onClick={onAddClothing}>Add To Wardrobe</button>
-                    <button>Search For New Styles</button>
+                    <button onClick={onSearchStyles}>Search For New Styles</button>
                 </div>
             </header>
         </div>
