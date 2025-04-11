@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import WelcomeScreen from './WelcomeScreen';
 import SignInPage from './SignInPage';
-import SignUpPage from './SignUpPage'; // ✅ Import SignUpPage
+import SignUpPage from './SignUpPage'; //Import SignUpPage
 import EmailPage from './EmailPage';
 import NewUserPasswordPage from './NewUserPasswordPage';
 import NewUserScreen from './NewUserScreen';
