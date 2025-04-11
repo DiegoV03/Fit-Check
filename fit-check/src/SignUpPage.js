@@ -10,6 +10,7 @@ const SignUpPage = ({ onSignIn }) => {
 
   const handleSignUp = async () => {
     try {
+<<<<<<< HEAD
       //  Step 1: Register with Firebase
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       console.log("Firebase user created:", userCredential.user);
@@ -60,6 +61,34 @@ const SignUpPage = ({ onSignIn }) => {
       setError(customMessage);
     }
   };
+=======
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      console.log("User created:", userCredential.user);
+      alert("Account created successfully! Please sign in.");
+      onSignIn(true);
+    } catch (error) {
+        let customMessage = "";
+
+        if (error.code === "auth/weak-password") {
+            customMessage += "Password must be at least 6 characters.";
+        }
+        else if (error.code === "auth/email-already-in-use") {
+            customMessage += "This email is already registered. Please use a different email or sign in.";
+        }
+        else if (error.code === "auth/invalid-email") {
+            customMessage += "Please enter a valid email address.";
+        }
+        else if (error.code === "auth/network-request-failed") {
+            customMessage += "Network error. Please check your internet connection.";
+        }
+        else {
+             setError("Sign Up Failed: " + error.message);
+        }
+
+        setError(customMessage);
+    }
+};
+>>>>>>> a3fca22f768d92ae1b1a6a842c3040e682c55dd3
 
   return (
     <div className="sign-in-page">
@@ -87,4 +116,8 @@ const SignUpPage = ({ onSignIn }) => {
   );
 };
 
+<<<<<<< HEAD
 export default SignUpPage;
+=======
+export default SignUpPage;
+>>>>>>> a3fca22f768d92ae1b1a6a842c3040e682c55dd3

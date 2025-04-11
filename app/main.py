@@ -5,6 +5,7 @@ from app.models import User, ClothingItem
 from app.schemas import UserLogin, UserCreate, UserResponse, TokenResponse, ClothingItemCreate, ClothingItemResponse
 from app.utils import verify_password, create_access_token, ACCESS_TOKEN_EXPIRE_MINUTES, get_current_user
 from app.crud import create_clothing_item, get_clothing_items, get_clothing_item, update_clothing_item, delete_clothing_item
+<<<<<<< HEAD
 from fastapi import FastAPI, Request
 from app.scraper import scrape_ssense_product
 from pydantic import BaseModel
@@ -24,6 +25,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+=======
+
+app = FastAPI()
+
+>>>>>>> a3fca22f768d92ae1b1a6a842c3040e682c55dd3
 # Dependencies: Getting a database connection
 def get_db():
     db = SessionLocal()
@@ -117,6 +123,7 @@ def delete_item(item_id: int, db: Session = Depends(get_db), current_user=Depend
     item = delete_clothing_item(db, item_id, owner_id=current_user.id)
     if not item:
         raise HTTPException(status_code=404, detail="Item not found")
+<<<<<<< HEAD
     return {"message": "Item deleted"}
 
 # Define input url
@@ -153,3 +160,6 @@ async def scrape_with_selenium(request: ScrapeRequest):
 def scrape_zara(req: ScrapeRequest):
     result = scrape_zara_selenium(req.url)
     return result
+=======
+    return {"message": "Item deleted"}
+>>>>>>> a3fca22f768d92ae1b1a6a842c3040e682c55dd3

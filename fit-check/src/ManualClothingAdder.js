@@ -7,6 +7,7 @@ const ManualClothingAdder = ({ onGoBack }) => {
     const [fabric, setFabric] = useState('');
     const [size, setSize] = useState('');
     const [length, setLength] = useState('');
+<<<<<<< HEAD
     const [message, setMessage] = useState('');
 
     const handleSubmit = async () => {
@@ -59,6 +60,18 @@ const ManualClothingAdder = ({ onGoBack }) => {
             console.error("Error while adding clothing:", error);
             alert("An error occurred. Please try again.");
         }
+=======
+
+    const handleSubmit = () => {
+        console.log('Clothing Details:', {
+            clothingType,
+            color,
+            fabric,
+            size,
+            length,
+        });
+        // Add logic to handle the submitted data
+>>>>>>> a3fca22f768d92ae1b1a6a842c3040e682c55dd3
     };
 
     return (
@@ -70,6 +83,7 @@ const ManualClothingAdder = ({ onGoBack }) => {
             <div className="form-group">
                 <label>Clothing Type:</label>
                 <div className="checkbox-group">
+<<<<<<< HEAD
                     {["Shirt", "Accessory", "Pants", "Outerwear", "Other"].map(type => (
                         <label key={type}>
                             <input
@@ -85,6 +99,55 @@ const ManualClothingAdder = ({ onGoBack }) => {
                 </div>
             </div>
 
+=======
+                    <label>
+                        <input
+                            type="radio"
+                            name="clothingType"
+                            value="Shirt"
+                            onChange={(e) => setClothingType(e.target.value)}
+                        />
+                        Shirt
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="clothingType"
+                            value="Accessory"
+                            onChange={(e) => setClothingType(e.target.value)}
+                        />
+                        Accessory
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="clothingType"
+                            value="Pants"
+                            onChange={(e) => setClothingType(e.target.value)}
+                        />
+                        Pants
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="clothingType"
+                            value="Outerwear"
+                            onChange={(e) => setClothingType(e.target.value)}
+                        />
+                        Outerwear
+                    </label>
+                    <label>
+                        <input
+                            type="radio"
+                            name="clothingType"
+                            value="Other"
+                            onChange={(e) => setClothingType(e.target.value)}
+                        />
+                        Other
+                    </label>
+                </div>
+            </div>
+>>>>>>> a3fca22f768d92ae1b1a6a842c3040e682c55dd3
             <div className="form-group">
                 <label>Color:</label>
                 <input
@@ -94,7 +157,10 @@ const ManualClothingAdder = ({ onGoBack }) => {
                     onChange={(e) => setColor(e.target.value)}
                 />
             </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> a3fca22f768d92ae1b1a6a842c3040e682c55dd3
             <div className="form-group">
                 <label>Fabric:</label>
                 <input
@@ -104,7 +170,10 @@ const ManualClothingAdder = ({ onGoBack }) => {
                     onChange={(e) => setFabric(e.target.value)}
                 />
             </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> a3fca22f768d92ae1b1a6a842c3040e682c55dd3
             <div className="form-group">
                 <label>Size:</label>
                 <input
@@ -114,7 +183,10 @@ const ManualClothingAdder = ({ onGoBack }) => {
                     onChange={(e) => setSize(e.target.value)}
                 />
             </div>
+<<<<<<< HEAD
 
+=======
+>>>>>>> a3fca22f768d92ae1b1a6a842c3040e682c55dd3
             <div className="form-group">
                 <label>Length:</label>
                 <input
@@ -124,12 +196,18 @@ const ManualClothingAdder = ({ onGoBack }) => {
                     onChange={(e) => setLength(e.target.value)}
                 />
             </div>
+<<<<<<< HEAD
 
             <button className="submit-button" onClick={handleSubmit}>
                 Submit
             </button>
 
             {message && <p className="success-message">{message}</p>}
+=======
+            <button className="submit-button" onClick={handleSubmit}>
+                Submit
+            </button>
+>>>>>>> a3fca22f768d92ae1b1a6a842c3040e682c55dd3
         </div>
     );
 };

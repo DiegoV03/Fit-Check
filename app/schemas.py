@@ -1,6 +1,9 @@
 from typing import Optional
 from pydantic import BaseModel, EmailStr
+<<<<<<< HEAD
 from pydantic import BaseModel
+=======
+>>>>>>> a3fca22f768d92ae1b1a6a842c3040e682c55dd3
 
 # User registration request model
 class UserCreate(BaseModel):
@@ -31,6 +34,7 @@ class ClothingItemBase(BaseModel):
     name: str
     color: str
     category: str
+<<<<<<< HEAD
     fabric: str
     size: str
     length: str
@@ -63,3 +67,15 @@ class ClothingItemResponse(BaseModel):
 # For scraper
 class ScrapeRequest(BaseModel):
     url: str
+=======
+
+class ClothingItemCreate(ClothingItemBase):
+    pass
+
+class ClothingItemResponse(ClothingItemBase):
+    id: int
+    owner_id: int
+
+    class Config:
+        from_attributes = True
+>>>>>>> a3fca22f768d92ae1b1a6a842c3040e682c55dd3
