@@ -12,6 +12,7 @@ from app.scraper_selenium import scrape_ssense_selenium
 from app.schemas import ScrapeRequest
 from app.scraper_selenium import scrape_zara_selenium
 from fastapi.middleware.cors import CORSMiddleware
+from app.utils import hash_password
 
 app = FastAPI()
 
