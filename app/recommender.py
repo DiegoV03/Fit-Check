@@ -47,11 +47,13 @@ async def recommend_outfits(
 ):
     try:
         # Get all clothing items for the current user
-        clothing_items = db.query(ClothingItem).all()
+        clothing_items = db.query(ClothingItem).filter(
+            ClothingItem.owner_id == current_user.id
+        ).all()
         
         # Categorize items
         categories = {
-            "shirts": [item for item in clothing_items if item.category.lower() in ["shirt", "outerwear"]],
+            "shirts": [item for item in clothing_items if item.category.lower() in ["shirt", "outerwear", "top"]],
             "pants": [item for item in clothing_items if item.category.lower() in ["pants"]],
             "accessories": [item for item in clothing_items if item.category.lower() in ["accessory", "other"]]
         }
@@ -85,7 +87,7 @@ async def recommend_outfits(
                 "pants": random.choice(categories["pants"]),
                 "accessory": random.choice(categories["accessories"])
             })
-        
+        print(f"Generated {len(outfits)} outfits")
         return outfits
     
     except Exception as e:
