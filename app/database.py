@@ -4,6 +4,14 @@ from sqlalchemy.orm import sessionmaker
 
 DATABASE_URL = "postgresql://fitcheck_user:fitcheck_password@localhost/fitcheck"
 
+# Dependencies: Getting a database connection
+def get_db():
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
+        
 engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
