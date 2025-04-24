@@ -3,16 +3,12 @@ import './LinkClothingAdder.css';
 
 const LinkClothingAdder = ({ onEnterManually, onGoBack }) => {
     const [link, setLink] = useState('');
-<<<<<<< HEAD
     const [scrapedItem, setScrapedItem] = useState(null);
-=======
->>>>>>> a3fca22f768d92ae1b1a6a842c3040e682c55dd3
 
     const handleLinkChange = (e) => {
         setLink(e.target.value);
     };
 
-<<<<<<< HEAD
     const handleSubmit = async () => {
         if (!link) {
             alert('Please enter a link.');
@@ -52,7 +48,7 @@ const LinkClothingAdder = ({ onEnterManually, onGoBack }) => {
                 body: JSON.stringify({
                     name: scrapedItem.name || "",
                     color: scrapedItem.color || "",
-                    category: "Outerwear",
+                    category: scrapedItem.category || "Other",
                     fabric: "unknown",
                     size: "M",
                     length: "standard",
@@ -71,19 +67,7 @@ const LinkClothingAdder = ({ onEnterManually, onGoBack }) => {
             alert("Failed to add item.");
         }
     };
-    
 
-=======
-    const handleSubmit = () => {
-        if (link) {
-            console.log('Clothing link submitted:', link);
-            // Add logic to handle the submitted link
-        } else {
-            alert('Please enter a link.');
-        }
-    };
-
->>>>>>> a3fca22f768d92ae1b1a6a842c3040e682c55dd3
     return (
         <div className="link-clothing-adder">
             <button className="back-button" onClick={onGoBack}>
@@ -102,7 +86,6 @@ const LinkClothingAdder = ({ onEnterManually, onGoBack }) => {
             </button>
             <p className="no-link-text">Don't have a link?</p>
             <button className="manual-button" onClick={onEnterManually}>
-<<<<<<< HEAD
                 Enter Manually
             </button>
 
@@ -125,16 +108,8 @@ const LinkClothingAdder = ({ onEnterManually, onGoBack }) => {
                     </button>
                 </div>
             )}
-=======
-              Enter Manually
-            </button>
->>>>>>> a3fca22f768d92ae1b1a6a842c3040e682c55dd3
         </div>
     );
 };
 
-<<<<<<< HEAD
 export default LinkClothingAdder;
-=======
-export default LinkClothingAdder;
->>>>>>> a3fca22f768d92ae1b1a6a842c3040e682c55dd3

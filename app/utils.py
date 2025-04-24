@@ -71,3 +71,25 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
     if user is None:
         raise credentials_exception
     return user
+
+def normalize_color(raw_color: str) -> str:
+    raw_color = raw_color.lower()
+    mapping = {
+        "light blue": "light blue", "blue": "blue",
+        "navy blue": "navy", "sky blue": "light blue",
+        "oyster-white": "white", "white": "white",
+        "black": "black", "grey": "gray", "gray": "gray",
+        "red": "red", "pink": "pink", "beige": "beige",
+        "green": "green", "yellow": "yellow",
+        "brown": "brown", "taupe brown": "brown",
+        "purple": "purple", "lavender": "lavender",
+        "orange": "orange", "maroon": "maroon",
+        "light indigo": "blue", "indigo": "blue"
+    }
+
+    # match known color
+    for k, v in mapping.items():
+        if k in raw_color:
+            return v
+
+    return "other"

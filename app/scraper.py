@@ -1,6 +1,21 @@
 import requests
 from bs4 import BeautifulSoup
 
+def classify_category(name: str, description: str = "") -> str:
+    text = f"{name} {description}".lower()
+
+    if any(k in text for k in ["t-shirt", "tee", "shirt", "blouse", "top", "polo"]):
+        return "Shirt"
+    elif any(k in text for k in ["jeans", "pants", "trousers", "shorts", "slacks", "cargo"]):
+        return "Pants"
+    elif any(k in text for k in ["coat", "jacket", "parka", "hoodie", "outerwear", "blazer"]):
+        return "Outerwear"
+    elif any(k in text for k in ["hat", "cap", "belt", "scarf", "gloves", "watch", "accessory", "bag"]):
+        return "Accessory"
+    else:
+        return "Other"
+
+
 def scrape_zara_product(url: str) -> dict:
     headers = {
         "User-Agent": "Mozilla/5.0"
@@ -15,7 +30,7 @@ def scrape_zara_product(url: str) -> dict:
     name = soup.find("h1").text.strip() if soup.find("h1") else "未知"
     image = soup.find("img")["src"] if soup.find("img") else ""
     color = "未知"
-    category = "上衣"
+    category = classify_category(name)
 
     return {
         "name": name,

@@ -1,4 +1,3 @@
-// src/StyleSearch.js
 import React, { useState, useEffect } from 'react';
 import './StyleSearch.css';
 
@@ -10,6 +9,14 @@ const StyleSearch = ({ onGoBack }) => {
   const fetchOutfits = async () => {
     setIsLoading(true);
     setError(null);
+
+    const token = localStorage.getItem("access_token");
+
+    if (!token) {
+      setError("You must be logged in to view recommendations.");
+      setIsLoading(false);
+      return;
+    }
 
     try {
       const mockClothingItems = [
@@ -31,6 +38,7 @@ const StyleSearch = ({ onGoBack }) => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
         },
         body: JSON.stringify({
           clothing_items: mockClothingItems
@@ -84,7 +92,9 @@ const StyleSearch = ({ onGoBack }) => {
             </div>
           ))
         ) : (
-          !isLoading && <p>No outfits could be generated with your current wardrobe.</p>
+          !isLoading && !error && (
+            <p>No outfits could be generated with your current wardrobe.</p>
+          )
         )}
       </div>
 

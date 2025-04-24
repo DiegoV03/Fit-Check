@@ -17,7 +17,6 @@ class ClothingItem(Base):
     __tablename__ = "clothes"
 
     id = Column(Integer, primary_key=True, index=True)
-<<<<<<< HEAD
     name = Column(String, nullable=False)
     color = Column(String, nullable=False)
     category = Column(String, default="", nullable=False)
@@ -27,11 +26,9 @@ class ClothingItem(Base):
     image_url = Column(String, default="")
     description = Column(String, default="")
     owner_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-=======
     name = Column(String, index=True)
     color = Column(String)
     category = Column(String)
     owner_id = Column(Integer, ForeignKey("users.id"))
 
->>>>>>> a3fca22f768d92ae1b1a6a842c3040e682c55dd3
     owner = relationship("User", back_populates="clothes")

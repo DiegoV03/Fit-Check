@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import React, { useEffect, useState } from "react";
 import "./AccessCurrWardrobe.css";
 
@@ -105,7 +104,7 @@ const AccessCurrWardrobe = ({ onGoBack }) => {
                                 <span>
                                     {item.name}
                                     {item.fabric || item.size || item.length ? (
-                                        <> ({[item.fabric, item.size, item.length].filter(Boolean).join(", ")})</>
+                                        <> ({[item.color, item.fabric, item.size, item.length].filter(Boolean).join(", ")})</>
                                     ) : null}
                                 </span>
                                 <button className="edit-btn" onClick={() => handleEditClick(item)}>✏️</button>
@@ -118,19 +117,12 @@ const AccessCurrWardrobe = ({ onGoBack }) => {
         );
     };
 
-=======
-import React from 'react';
-import './AccessCurrWardrobe.css';
-
-const AccessCurrWardrobe = ({ onGoBack }) => {
->>>>>>> a3fca22f768d92ae1b1a6a842c3040e682c55dd3
     return (
         <div className="access-curr-wardrobe">
             <button className="back-button" onClick={onGoBack}>
                 Back to Landing
             </button>
             <h1 className="title">Current Wardrobe</h1>
-<<<<<<< HEAD
 
             {editingItem && (
                 <div className="edit-form">
@@ -157,41 +149,6 @@ const AccessCurrWardrobe = ({ onGoBack }) => {
                 {["Shirt", "Pants", "Accessory", "Outerwear", "Other"].map(category =>
                     renderCategory(category)
                 )}
-=======
-            <div className="wardrobe-sections">
-                <div className="wardrobe-section">
-                    <h2>Shirts</h2>
-                    <div className="scrollable">
-                        <p>Shirt 1</p>
-                        <p>Shirt 2</p>
-                        <p>Shirt 3</p>
-                    </div>
-                </div>
-                <div className="wardrobe-section">
-                    <h2>Pants</h2>
-                    <div className="scrollable">
-                        <p>Pants 1</p>
-                        <p>Pants 2</p>
-                        <p>Pants 3</p>
-                    </div>
-                </div>
-                <div className="wardrobe-section">
-                    <h2>Accessories</h2>
-                    <div className="scrollable">
-                        <p>Accessory 1</p>
-                        <p>Accessory 2</p>
-                        <p>Accessory 3</p>
-                    </div>
-                </div>
-                <div className="wardrobe-section">
-                    <h2>Outerwear</h2>
-                    <div className="scrollable">
-                        <p>Outerwear 1</p>
-                        <p>Outerwear 2</p>
-                        <p>Outerwear 3</p>
-                    </div>
-                </div>
->>>>>>> a3fca22f768d92ae1b1a6a842c3040e682c55dd3
             </div>
         </div>
     );

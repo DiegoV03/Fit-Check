@@ -15,6 +15,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from app.utils import hash_password
 from app.recommender import router as recommender_router
 from app.database import get_db
+from app.scraper_selenium import scrape_zara_selenium
 
 app = FastAPI()
 
@@ -147,6 +148,7 @@ async def scrape_with_selenium(request: ScrapeRequest):
 @app.post("/scrape_zara/")
 def scrape_zara(req: ScrapeRequest):
     result = scrape_zara_selenium(req.url)
+    print("Scraped result:", result)
     return result
 
 app.include_router(recommender_router, prefix="/api")

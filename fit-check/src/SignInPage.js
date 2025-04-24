@@ -10,7 +10,6 @@ const SignInPage = ({ onNewUser, onReturningUser }) => {
 
     const handleLogin = async () => {
         try {
-<<<<<<< HEAD
             // Step 1: Firebase authentication
             await signInWithEmailAndPassword(auth, email, password);
             console.log("Firebase login success");
@@ -40,14 +39,6 @@ const SignInPage = ({ onNewUser, onReturningUser }) => {
         } catch (error) {
             let customMessage = "Login Failed: ";
 
-=======
-            await signInWithEmailAndPassword(auth, email, password);
-            alert("Login Successful!");
-            onReturningUser();  // Navigate to the next step
-        } catch (error) {
-            let customMessage = "Login Failed: wrong password";  
-    
->>>>>>> a3fca22f768d92ae1b1a6a842c3040e682c55dd3
             if (error.code === "auth/wrong-password") {
                 customMessage += "Incorrect password. Please try again.";
             } else if (error.code === "auth/user-not-found") {
@@ -59,16 +50,10 @@ const SignInPage = ({ onNewUser, onReturningUser }) => {
             } else if (error.code === "auth/network-request-failed") {
                 customMessage += "Network error. Please check your internet connection.";
             } else {
-<<<<<<< HEAD
                 customMessage += error.message;
             }
 
             console.error("Login error:", error);
-=======
-                setError("Login Failed: " + "Incorrect password. Please try again.");;
-            }
-    
->>>>>>> a3fca22f768d92ae1b1a6a842c3040e682c55dd3
             setError(customMessage);
         }
     };
@@ -99,8 +84,4 @@ const SignInPage = ({ onNewUser, onReturningUser }) => {
     );
 };
 
-<<<<<<< HEAD
 export default SignInPage;
-=======
-export default SignInPage;
->>>>>>> a3fca22f768d92ae1b1a6a842c3040e682c55dd3
