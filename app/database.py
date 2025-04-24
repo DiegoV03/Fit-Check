@@ -1,8 +1,11 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+import os
+from dotenv import load_dotenv
 
-DATABASE_URL = "postgresql://fitcheck_user:fitcheck_password@localhost/fitcheck"
+load_dotenv()
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 # Dependencies: Getting a database connection
 def get_db():

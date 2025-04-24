@@ -6,13 +6,14 @@ from app.models import User
 from sqlalchemy.orm import Session
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
-
+from dotenv import load_dotenv
+import os
 
 # Set password hash algorithm
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # Key for generating JWT tokens (please replace with a more secure value)
-SECRET_KEY = "supersecretkey"
+SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
 
