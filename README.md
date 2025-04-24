@@ -136,10 +136,23 @@ Builds static files into the `build/` directory for production deployment.
 
 ---
 
-## License
-MIT
+### 📂 Third Party Tools and Licenses
 
----
+This project uses the following third-party open-source tools and libraries in accordance with their respective licenses:
+
+- **React** – Used as the frontend framework for building interactive user interfaces.  
+  License: [MIT License](https://opensource.org/licenses/MIT)
+
+- **Firebase Authentication** – Used for secure user registration, login, and session management.  
+  License: [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+
+- **BeautifulSoup** – Used for parsing static HTML pages during the web scraping process to extract product details like name, color, and description.  
+  License: [MIT License](https://opensource.org/licenses/MIT)
+
+- **Selenium** – Used for dynamic web scraping to handle JavaScript-rendered content and bypass anti-scraping mechanisms when scraping external product links.  
+  License: [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0)
+
+All external tools were used in compliance with their respective licenses, including proper attribution and usage rights.
 
 ## Contributors
 - Junjie Ao
